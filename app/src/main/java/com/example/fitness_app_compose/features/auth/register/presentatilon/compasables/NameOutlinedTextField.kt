@@ -1,6 +1,6 @@
-package com.example.fitness_app_compose.features.auth.presentatilon.Compasables
+package com.example.fitness_app_compose.features.auth.register.presentatilon.compasables
 
-import MyScreenUiState
+import RegisterUiState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,22 +14,24 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NameOutlinedTextField(
-    uiState: MyScreenUiState,
+    uiState: RegisterUiState,
     onInputChanged: (String) -> Unit,
 ){
-    Column {
+    Column(
+        modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+    ) {
         OutlinedTextField(
-
-            value = uiState.passwordText,
+            modifier = Modifier.fillMaxWidth(),
+            value = uiState.nameText,
             onValueChange = onInputChanged, // Kullanıcı yazınca bu event tetiklenir
             label =  {Text("İsim Giriniz (en az 3 karakter)")} ,
-            isError = !uiState.IsPasswordValid, // Hata durumu state'ten okunur
+            isError = !uiState.IsNameValid, // Hata durumu state'ten okunur
             singleLine = true,
-            modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
+
         )
 
         // Eğer giriş geçerli değilse, hata mesajını göster
-        if (!uiState.IsPasswordValid) {
+        if (!uiState.IsNameValid) {
             Text(
                 text = "İsim en az 3 karakter olmalıdır.",
                 color = Color.Red,

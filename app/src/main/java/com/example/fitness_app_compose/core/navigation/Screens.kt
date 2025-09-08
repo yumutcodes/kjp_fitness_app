@@ -7,6 +7,7 @@ sealed class Screens(val route: String) {
     object Home : Screens("home_screen")
 
     object Register : Screens("register")
+    object Login : Screens("login")
 
     // Argüman alacak bir ekran için 'data class' kullanmak daha esnektir.
     // Bu sayede argümanları daha güvenli bir şekilde yönetebiliriz.
