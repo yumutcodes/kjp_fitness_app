@@ -94,7 +94,7 @@ fun LoginScreenContent(
             modifier = Modifier.align(Alignment.Start),
             contentPadding = PaddingValues(end=16.dp, start = 2.dp),
             onClick = {
-                navHostController.navigate(Screens.Register.route)
+                navHostController.navigate(Screens.Register)
             }
         ) {
             Text(

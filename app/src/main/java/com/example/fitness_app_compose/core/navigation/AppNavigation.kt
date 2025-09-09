@@ -23,7 +23,7 @@ fun AppNavigation(innerpadding: PaddingValues) {
     NavHost(
         modifier = Modifier.padding(innerpadding),
         navController = navController,
-        startDestination = Screens.Register.route, // Uygulama açıldığında gösterilecek ilk ekran
+        startDestination = Screens.Register, // Uygulama açıldığında gösterilecek ilk ekran
         enterTransition = { EnterTransition.None },
 
         // Bir ekrandan çıkarken animasyon olmasın
@@ -36,13 +36,13 @@ fun AppNavigation(innerpadding: PaddingValues) {
         popExitTransition = { ExitTransition.None }
 
     ) {
-        composable(route = Screens.Login.route) {
+        composable<Screens.Login> {
             // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
             LoginPage(
                 navHostController = navController
             )
         }
-        composable(route = Screens.Register.route) {
+        composable<Screens.Register> {
             // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
             RegisterPage(
 navHostController = navController

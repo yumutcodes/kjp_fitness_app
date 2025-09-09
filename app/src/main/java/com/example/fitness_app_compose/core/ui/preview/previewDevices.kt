@@ -1,7 +1,6 @@
-package com.example.fitness_app_compose.core.preview
+package com.example.fitness_app_compose.core.ui.preview
 
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.fitness_app_compose.core.navigation.Screens
 
 class DevicesGroups {
     companion object {

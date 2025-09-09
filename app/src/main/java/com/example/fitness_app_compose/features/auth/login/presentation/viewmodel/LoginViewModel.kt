@@ -5,12 +5,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.serialization.Serializable
 
 /**
  * Kullanıcı arayüzünün anlık durumunu temsil eden veri sınıfı.
  * Bu yapı, state'i tek bir yerden yönetmeyi ve gelecekte yeni özellikler
  * eklemeyi kolaylaştırır.
  */
+@Serializable
 data class LoginUiState(
     val emailText: String = "",
     val IsEmailValid: Boolean = true,

@@ -3,6 +3,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -11,13 +12,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.fitness_app_compose.core.navigation.Screens
-import com.example.fitness_app_compose.core.preview.DevicePreviews
+import com.example.fitness_app_compose.core.ui.preview.DevicePreviews
 import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterOutlinedTextField
 
 /**
@@ -98,7 +100,7 @@ fun MyScreenContent(
             modifier = Modifier.align(Alignment.Start),
             contentPadding = PaddingValues(end=16.dp, start = 2.dp),
             onClick = {
-                navHostController.navigate(Screens.Login.route)
+                navHostController.navigate(Screens.Login)
             }
         ) {
             Text(
@@ -136,11 +138,17 @@ fun MyScreenContent(
         //   Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            modifier = Modifier.padding(top = 16.dp),
-            onClick = onClearClicked
+            modifier = Modifier.size(width = 200.dp, height = 70.dp).padding(top = 16.dp),
+            onClick = onClearClicked,
+            //background mavi olsun
+               colors = ButtonDefaults.buttonColors(
+                containerColor =  Color(0xFF1976D2)
+            )
 
         ) {
-            Text("Metni Temizle")
+            Text("Register",
+                fontSize=20.sp
+                )
         }
 
     }
