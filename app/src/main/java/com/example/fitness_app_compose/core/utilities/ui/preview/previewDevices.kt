@@ -1,7 +1,7 @@
-package com.example.fitness_app_compose.core.ui.preview
+package com.example.fitness_app_compose.core.utilities.ui.preview
 
 import androidx.compose.ui.tooling.preview.Preview
-
+import android.content.res.Configuration
 class DevicesGroups {
     companion object {
         const val Phone = "Telefonlar"
@@ -45,3 +45,11 @@ class DevicesGroups {
 annotation class DevicePreviews{
 
 }
+@Preview(name = "Aydınlık Tema",
+    showBackground = true
+)
+@Preview(name = "Karanlık Tema",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+annotation class ThemePreviews

@@ -5,13 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.fitness_app_compose.core.navigation.AppNavigation
-import com.example.fitness_app_compose.core.ui.theme.Fitness_app_composeTheme
+import com.example.fitness_app_compose.core.utilities.ui.theme.Fitness_app_composeTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -20,11 +17,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Fitness_app_composeTheme {
-                Scaffold(
-                    topBar = {TopAppBar(title= {Text("ds")})},
-                ) {innerPadding   ->
-                AppNavigation(innerPadding)
-                }
+
+                AppNavigation()
+
             }
         }
     }
@@ -37,10 +32,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     Fitness_app_composeTheme {
-        Scaffold(
-            topBar = {TopAppBar(title= {Text("ds")})},
-        ) {innerPadding   ->
-            AppNavigation(innerPadding)
+
+            AppNavigation()
         }
-    }
+
 }

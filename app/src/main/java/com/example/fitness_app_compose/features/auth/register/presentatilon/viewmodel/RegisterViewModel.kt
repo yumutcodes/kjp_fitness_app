@@ -9,13 +9,22 @@ import kotlinx.coroutines.flow.update
  * Bu yapı, state'i tek bir yerden yönetmeyi ve gelecekte yeni özellikler
  * eklemeyi kolaylaştırır.
  */
+sealed interface RegisterState {
+    object Idle : RegisterState // Başlangıç durumu, hiçbir işlem yapılmadı
+    object Loading : RegisterState // İşlem devam ediyor
+    object Success : RegisterState // İşlem başarılı
+    data class Error(val message: String) : RegisterState // İşlemde hata var
+}
 data class RegisterUiState(
     val nameText: String = "",
     val IsNameValid: Boolean = true,
     val emailText: String = "",
     val IsEmailValid: Boolean = true,
     val passwordText: String = "",
-    val IsPasswordValid: Boolean = true
+    val IsPasswordValid: Boolean = true,
+    val registerState: RegisterState = RegisterState.Idle
+
+
 )
 
 /**
@@ -65,16 +74,16 @@ class RegisterViewModel : ViewModel() {
     /**
      * Metin alanını temizlemek için kullanılan fonksiyon.
      */
-    fun clearInput() {
-        _uiState.update { it.copy(nameText = "",
-            emailText = "",
-            passwordText = "",
-            IsNameValid = true,
-            IsEmailValid = true,
-            IsPasswordValid = true
+   fun onRegisterClicked() {
+        _uiState.update { currentState ->
+    currentState.copy(
+        registerState= RegisterState.Loading
+    )
 
-            ) }
+}
+
     }
+
 
     /**
      * Basit bir doğrulama kuralı.

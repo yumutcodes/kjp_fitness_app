@@ -1,26 +1,26 @@
-
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.fitness_app_compose.core.navigation.Screens
-import com.example.fitness_app_compose.core.ui.preview.DevicePreviews
+import com.example.fitness_app_compose.core.utilities.ui.preview.DevicePreviews
+import com.example.fitness_app_compose.core.utilities.ui.preview.ThemePreviews
+import com.example.fitness_app_compose.core.utilities.ui.theme.Fitness_app_composeTheme
+import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterLoginNavigateButton
 import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterOutlinedTextField
+import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterRegisterButtonWithWhen
 
 /**
  * ViewModel'i başlatan ve state'i dinleyen ana Composable.
@@ -28,8 +28,7 @@ import com.example.fitness_app_compose.features.auth.register.presentatilon.comp
  */
 @Composable
 fun RegisterPage(
-    registerViewModel: RegisterViewModel = viewModel(),
-    navHostController: NavHostController
+    registerViewModel: RegisterViewModel = viewModel(), navHostController: NavHostController
 ) {
     // ViewModel'deki StateFlow'u, Compose'un anlayacağı bir State'e dönüştürüyoruz.
     // 'by' anahtar kelimesi sayesinde 'uiState.value' yerine doğrudan 'uiState' kullanabiliriz.
@@ -37,27 +36,32 @@ fun RegisterPage(
 
     // UI'ın kendisini, state'i ve event'leri parametre olarak alan
     // başka bir Composable'a devrediyoruz. Bu, preview ve test için en iyi yöntemdir.
+
+
     MyScreenContent(
         uiState = uiState,
         onNameChanged = registerViewModel::onNameChanged,
         onEmailChanged = registerViewModel::onEmailChanged,
         onPasswordChanged = registerViewModel::onPasswordChanged,// Fonksiyon referansı
-        onClearClicked = registerViewModel::clearInput,
+        onRegisterClicked = registerViewModel::onRegisterClicked,
         navHostController = navHostController
     )
+
 }
+
 
 /**
  * Sadece UI'ı çizen "stateless" (durum sahibi olmayan) Composable.
  * Ne yapacağını dışarıdan (parametrelerden) alır.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyScreenContent(
     uiState: RegisterUiState,
     onNameChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
-    onClearClicked: () -> Unit,
+    onRegisterClicked: () -> Unit,
     navHostController: NavHostController
 ) {
 
@@ -68,104 +72,74 @@ fun MyScreenContent(
 //            .imePadding() // Klavye açıldığında otomatik padding ekler
 //    ) {
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .imePadding() // ime Padding klavye açılınca otomatik padding ekler
-            .verticalScroll(scrollState)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        RegisterOutlinedTextField(
-            value = uiState.nameText,
-            onInputChanged = { gelenVeri -> onNameChanged(gelenVeri) },
-            isValid = uiState.IsNameValid,
-            labelText = "Enter Name",
-        )
-        RegisterOutlinedTextField(
-            value = uiState.emailText,
-            onInputChanged = onEmailChanged,
-            isValid = uiState.IsEmailValid,
-            labelText = "Enter Email",
-        )
+    Scaffold(
+        topBar = { TopAppBar(title = { Text("Register") }) }
 
-        RegisterOutlinedTextField(
-            value = uiState.passwordText,
-            onInputChanged = onPasswordChanged,
-            isValid = uiState.IsPasswordValid,
-            labelText = "Enter Password",
-        )
-        TextButton(
-            modifier = Modifier.align(Alignment.Start),
-            contentPadding = PaddingValues(end=16.dp, start = 2.dp),
-            onClick = {
-                navHostController.navigate(Screens.Login)
-            }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .imePadding() // ime Padding klavye açılınca otomatik padding ekler
+                .padding(innerPadding)
+                .verticalScroll(scrollState)
+
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = "Login",
-                fontSize = 20.sp
+            RegisterOutlinedTextField(
+                value = uiState.nameText,
+                onInputChanged = { gelenVeri -> onNameChanged(gelenVeri) },
+                isValid = uiState.IsNameValid,
+                labelText = "Enter Name",
             )
-        }
-        //        OutlinedTextField(
-        //            value = uiState.nameText,
-        //            onValueChange = onNameChanged, // Kullanıcı yazınca bu event tetiklenir
-        //            label = { Text("İsim Giriniz (en az 3 karakter)") },
-        //            isError = !uiState.IsNameValid, // Hata durumu state'ten okunur
-        //            singleLine = true,
-        //            modifier = Modifier.fillMaxWidth()
-        //        )
-        //
-        //        // Eğer giriş geçerli değilse, hata mesajını göster
-        //        if (!uiState.IsNameValid) {
-        //            Text(
-        //                text = "İsim en az 3 karakter olmalıdır.",
-        //                color = Color.Red,
-        //                modifier = Modifier
-        //                    .padding(top = 4.dp)
-        //                    .align(Alignment.Start) // Metni sola hizala
-        //            )
-        //        }
-        //   Spacer(modifier = Modifier.height(16.dp))
-
-
-        // Eğer giriş geçerli değilse, hata mesajını göster
-
-        // Spacer(modifier = Modifier.height(16.dp))
-
-
-        //   Spacer(modifier = Modifier.height(16.dp))
-
-        Button(
-            modifier = Modifier.size(width = 200.dp, height = 70.dp).padding(top = 16.dp),
-            onClick = onClearClicked,
-            //background mavi olsun
-               colors = ButtonDefaults.buttonColors(
-                containerColor =  Color(0xFF1976D2)
+            RegisterOutlinedTextField(
+                value = uiState.emailText,
+                onInputChanged = onEmailChanged,
+                isValid = uiState.IsEmailValid,
+                labelText = "Enter Email",
             )
 
-        ) {
-            Text("Register",
-                fontSize=20.sp
-                )
-        }
+            RegisterOutlinedTextField(
+                value = uiState.passwordText,
+                onInputChanged = onPasswordChanged,
+                isValid = uiState.IsPasswordValid,
+                labelText = "Enter Password",
+            )
+            RegisterLoginNavigateButton(
+                uiState = uiState,
+                navHostController = navHostController,
+                boxmodifier = Modifier.size(20.dp),
+                textButtonModifier = Modifier.align(Alignment.Start)
+            )
+            RegisterRegisterButtonWithWhen(
+                uiState = uiState,
+                onRegisterClicked = onRegisterClicked,
+            )
 
+
+
+        }
     }
     //}
 }
 
 @DevicePreviews
+@ThemePreviews
 @Composable
 fun MyScreenPreview() {
     // Preview'da ViewModel olmadan UI'ı test edebiliriz.
-    MyScreenContent(
-        uiState = RegisterUiState(),
-        onEmailChanged = {},
-        onNameChanged = {},
-        onPasswordChanged = {},
-        onClearClicked = {},
-        navHostController = NavHostController(LocalContext.current)
-    )
+    Fitness_app_composeTheme(
+
+    ) {
+        MyScreenContent(
+            uiState = RegisterUiState(),
+            onEmailChanged = {},
+            onNameChanged = {},
+            onPasswordChanged = {},
+            onRegisterClicked = {},
+            navHostController = NavHostController(LocalContext.current)
+        )
+    }
 }
 

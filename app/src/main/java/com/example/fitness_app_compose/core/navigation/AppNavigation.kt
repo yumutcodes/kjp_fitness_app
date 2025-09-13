@@ -15,13 +15,13 @@ import com.example.fitness_app_compose.features.auth.login.presentation.LoginPag
 // com/example/myapp/core/navigation/AppNavigation.kt
 
 @Composable
-fun AppNavigation(innerpadding: PaddingValues) {
+fun AppNavigation() {
     // NavController'ı oluştur ve recomposition'lar boyunca durumunu hatırla.
     val navController = rememberNavController()
 
     // NavHost, navigasyon grafiğini kurar.s
     NavHost(
-        modifier = Modifier.padding(innerpadding),
+
         navController = navController,
         startDestination = Screens.Register, // Uygulama açıldığında gösterilecek ilk ekran
         enterTransition = { EnterTransition.None },

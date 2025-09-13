@@ -1,7 +1,8 @@
-package com.example.fitness_app_compose.core.ui.theme
+package com.example.fitness_app_compose.core.utilities.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -15,19 +16,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 data class AppColors(
+    val blue700: Color,
     val accent: Color,
-
     val textPrimary: Color,
-
 )
 private val LightAppColorPalette = AppColors(
+    blue700 = Blue700,
     accent = Blue700,
     textPrimary = Color.Black,
-
 )
 
 // Bu da koyu tema için.
 private val DarkAppColorPalette = AppColors(
+    blue700 = Blue700,
     accent = Blue700,
     textPrimary = Color.White,
 )
@@ -88,13 +89,13 @@ fun Fitness_app_composeTheme(
 // --- 4. KOLAY ERİŞİM İÇİN BİR OBJECT OLUŞTUR (ŞİDDETLE TAVSİYE EDİLİR) ---
 // Bu sayede her seferinde LocalAppColors.current yazmak zorunda kalmazsın.
 object AppTheme {
-    val colors: AppColors
+    val appColors: AppColors
         @Composable
         @ReadOnlyComposable
         get() = LocalAppColors.current
 
     // Standart Material renklerine de buradan erişebilirsin
-    val materialColorScheme: androidx.compose.material3.ColorScheme
+    val materialColorScheme: ColorScheme
         @Composable
         @ReadOnlyComposable
         get() = MaterialTheme.colorScheme

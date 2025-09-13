@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization) // Kotlinx Serialization eklentisi eklendi
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
+
 }
 
 android {
@@ -39,6 +42,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.security.crypto)
 // Hilt ile ViewModel enjeksiyonu için bu da genellikle gereklidir.
     implementation(libs.androidx.hilt.navigation.compose)
 // Compose Navigation'ın kendisi
