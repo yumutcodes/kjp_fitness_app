@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization) // Kotlinx Serialization eklentisi eklendi
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
-
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
