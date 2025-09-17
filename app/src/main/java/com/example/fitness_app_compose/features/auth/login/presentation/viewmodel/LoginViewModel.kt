@@ -1,10 +1,16 @@
 package com.example.fitness_app_compose.features.auth.login.presentation.viewmodel
 
+import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
+import javax.inject.Inject
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.fitness_app_compose.features.auth.data.model.LoginRequest
+import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,7 +29,9 @@ data class LoginUiState(
 /**
  * MyScreen'in iş mantığını yöneten ViewModel.
  */
-class LoginViewModel : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val repo: AuthRepository,
+    private val sessionManager: SessionManager ): ViewModel() {
 
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -69,6 +77,72 @@ class LoginViewModel : ViewModel() {
 
         ) }
     }
+    fun login() {
+        val email = uiState.value.emailText.trim()
+        val password = uiState.value.passwordText
+
+        // Lokal doğrulama
+        val emailValid = validateInput(email)
+        val passwordValid = validateInput(password)
+
+        // Eğer doğrulama başarısızsa state'i güncelle ve çık
+        if (!emailValid || !passwordValid) {
+            _uiState.update {
+                it.copy(
+                    IsEmailValid = emailValid,
+                    IsPasswordValid = passwordValid,
+
+                )
+            }
+            return
+        }
+        // Network çağrısı
+        viewModelScope.launch {
+          //  _uiState.update { it.copy(isLoading = true, errorMessage = null, isSuccess = false) }
+
+            try {
+                val result = repo.login(LoginRequest(email = email, pass = password))
+
+                result.onSuccess { response ->
+                    // Token'ları güvenli bir şekilde kaydet
+                    sessionManager.saveTokens(response.accessToken, response.refreshToken)
+
+                    // Başarı durumunu bildir
+//                    _uiState.update {
+//                        it.copy(
+//                            isLoading = false,
+//                            errorMessage = null,
+//                            isSuccess = true
+//                        )
+//                    }
+                }.onFailure { throwable ->
+//                    _uiState.update {
+//                        it.copy(
+//                            isLoading = false,
+//                            errorMessage = throwable.message ?: "Giriş başarısız",
+//                            isSuccess = false
+//                        )
+//                    }
+                }
+            } catch (t: Throwable) {
+                // Genel beklenmeyen hatalar
+//                _uiState.update {
+//                    it.copy(
+//                        isLoading = false,
+//                        errorMessage = t.message ?: "Bilinmeyen hata",
+//                        isSuccess = false
+//                    )
+//                }
+            }
+        }
+    }
+
+
+
+
+    }
+
+
 
     /**
      * Basit bir doğrulama kuralı.
@@ -78,4 +152,3 @@ class LoginViewModel : ViewModel() {
         // Metin boşken hata gösterme, yazmaya başlayınca kontrol et.
         return input.length >= 3
     }
-}

@@ -13,7 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.fitness_app_compose.features.auth.login.presentation.LoginPage
 
 // com/example/myapp/core/navigation/AppNavigation.kt
-
+//TODO: en iyi yöntem aşşağıda
+// https://aistudio.google.com/prompts/189t4_8GGotss_zRXLBSH-KJaT8QUw5ih
 @Composable
 fun AppNavigation() {
     // NavController'ı oluştur ve recomposition'lar boyunca durumunu hatırla.
@@ -47,38 +48,26 @@ fun AppNavigation() {
             RegisterPage(
 navHostController = navController
             )
-
-            // Ana ekranın rotasını ve Composable'ını tanımla
-            /*   composable(route = Screen.Home.route) {
-            // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
-            HomeScreen(
-                onNavigateToDetail = { productId ->
-                    // Detay ekranına gitmek için navigate fonksiyonunu çağırıyoruz.
-                    // Rota oluşturma fonksiyonumuzu kullanarak hatasız bir rota elde ediyoruz.
-                    navController.navigate(Screen.ProductDetail.createRoute(productId))
-                }
-            )
-        }*/
-
-            // Ürün detay ekranının rotasını ve Composable'ını tanımla
-            /*  composable(
-            route = Screen.ProductDetail.route,
-            arguments = listOf(navArgument("productId") { // Argümanın adını ve tipini belirtiyoruz.
-                type = NavType.StringType
-            })
-        ) { backStackEntry ->
-            // NavHost'tan argümanı alıyoruz. Rota'daki {productId} ile aynı isimde olmalı.
-            val productId = backStackEntry.arguments?.getString("productId")
-
-            ProductDetailScreen(
-                productId = productId,
-                onNavigateBack = {
-                    // Geri tuşuna basma işlevini programatik olarak tetikler.
-                    navController.popBackStack()
-                }
-            )
         }
-        */
-        }
+
     }
 }
+//örnek kod
+//composable<Screens.Home> {
+//    HomeScreen(
+//        onNavigateToDetails = { productId ->
+//            // ProductDetail ekranına giderken bir nesne oluşturup gönderiyoruz.
+//            // Artık manuel string birleştirme yok!
+//            navController.navigate(Screens.ProductDetail(productId = productId))
+//        }
+//    )
+//}
+//
+//// Argüman alan ekran
+//composable<Screens.ProductDetail> { backStackEntry ->
+//    // Gelen argümanları tip-güvenli bir şekilde alıyoruz.
+//    val productDetailScreen: Screens.ProductDetail = backStackEntry.toRoute()
+//    val productId = productDetailScreen.productId
+//
+//    ProductDetailScreen(productId = productId)
+//}

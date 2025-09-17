@@ -1,6 +1,6 @@
 package com.example.fitness_app_compose.features.auth.register.presentatilon.compasables
 
-import RegisterUiState
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -13,6 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fitness_app_compose.core.utilities.ui.theme.AppTheme
+import com.example.fitness_app_compose.features.auth.register.presentatilon.RegisterState
+import com.example.fitness_app_compose.features.auth.register.presentatilon.RegisterUiState
+
 @Composable
 fun RegisterRegisterButtonWithWhen(
     uiState: RegisterUiState,

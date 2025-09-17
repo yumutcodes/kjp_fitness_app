@@ -42,6 +42,11 @@ android {
 }
 
 dependencies {
+    // --- YENİ EKLENEN AĞ (NETWORK) KÜTÜPHANELERİ ---
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+    // --------------------------------------------------
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)

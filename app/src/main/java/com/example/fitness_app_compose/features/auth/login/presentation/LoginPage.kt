@@ -1,7 +1,6 @@
 package com.example.fitness_app_compose.features.auth.login.presentation
 
-import RegisterUiState
-import RegisterViewModel
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -17,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -78,6 +76,7 @@ fun LoginScreenContent(
     Scaffold(
         topBar = {TopAppBar(title = {Text("Login")})}
     ) {innerPadding->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()

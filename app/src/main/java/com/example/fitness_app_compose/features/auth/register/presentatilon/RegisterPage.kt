@@ -3,21 +3,28 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.fitness_app_compose.core.utilities.ui.preview.DevicePreviews
 import com.example.fitness_app_compose.core.utilities.ui.preview.ThemePreviews
+import com.example.fitness_app_compose.core.utilities.ui.theme.AppColors
+import com.example.fitness_app_compose.core.utilities.ui.theme.AppTheme
 import com.example.fitness_app_compose.core.utilities.ui.theme.Fitness_app_composeTheme
+import com.example.fitness_app_compose.features.auth.register.presentatilon.RegisterUiState
+import com.example.fitness_app_compose.features.auth.register.presentatilon.RegisterViewModel
 import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterLoginNavigateButton
 import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterOutlinedTextField
 import com.example.fitness_app_compose.features.auth.register.presentatilon.compasables.RegisterRegisterButtonWithWhen
@@ -73,52 +80,63 @@ fun MyScreenContent(
 //    ) {
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Register") }) }
+        topBar = { TopAppBar(title = { Text("Register") },
+
+            colors = TopAppBarDefaults.topAppBarColors(
+                // TopAppBar'ın arka plan rengini burada belirliyoruz.
+                containerColor = AppTheme.appColors.blue700,
+
+                // Başlık rengini de buradan ayarlayabiliriz.
+                titleContentColor = Color.White
+
+            )) },
+        containerColor = AppTheme.appColors.accent,
 
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .imePadding() // ime Padding klavye açılınca otomatik padding ekler
-                .padding(innerPadding)
-                .verticalScroll(scrollState)
+        Surface {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .imePadding() // ime Padding klavye açılınca otomatik padding ekler
+                    .padding(innerPadding)
+                    .verticalScroll(scrollState)
 
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            RegisterOutlinedTextField(
-                value = uiState.nameText,
-                onInputChanged = { gelenVeri -> onNameChanged(gelenVeri) },
-                isValid = uiState.IsNameValid,
-                labelText = "Enter Name",
-            )
-            RegisterOutlinedTextField(
-                value = uiState.emailText,
-                onInputChanged = onEmailChanged,
-                isValid = uiState.IsEmailValid,
-                labelText = "Enter Email",
-            )
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                RegisterOutlinedTextField(
+                    value = uiState.nameText,
+                    onInputChanged = { gelenVeri -> onNameChanged(gelenVeri) },
+                    isValid = uiState.IsNameValid,
+                    labelText = "Enter Name",
+                )
+                RegisterOutlinedTextField(
+                    value = uiState.emailText,
+                    onInputChanged = onEmailChanged,
+                    isValid = uiState.IsEmailValid,
+                    labelText = "Enter Email",
+                )
 
-            RegisterOutlinedTextField(
-                value = uiState.passwordText,
-                onInputChanged = onPasswordChanged,
-                isValid = uiState.IsPasswordValid,
-                labelText = "Enter Password",
-            )
-            RegisterLoginNavigateButton(
-                uiState = uiState,
-                navHostController = navHostController,
-                boxmodifier = Modifier.size(20.dp),
-                textButtonModifier = Modifier.align(Alignment.Start)
-            )
-            RegisterRegisterButtonWithWhen(
-                uiState = uiState,
-                onRegisterClicked = onRegisterClicked,
-            )
+                RegisterOutlinedTextField(
+                    value = uiState.passwordText,
+                    onInputChanged = onPasswordChanged,
+                    isValid = uiState.IsPasswordValid,
+                    labelText = "Enter Password",
+                )
+                RegisterLoginNavigateButton(
+                    uiState = uiState,
+                    navHostController = navHostController,
+                    boxmodifier = Modifier.size(20.dp),
+                    textButtonModifier = Modifier.align(Alignment.Start)
+                )
+                RegisterRegisterButtonWithWhen(
+                    uiState = uiState,
+                    onRegisterClicked = onRegisterClicked,
+                )
 
 
-
+            }
         }
     }
     //}

@@ -1,6 +1,6 @@
 package com.example.fitness_app_compose.features.auth.register.presentatilon.compasables
 
-import RegisterUiState
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Text
@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.fitness_app_compose.core.navigation.Screens
+import com.example.fitness_app_compose.features.auth.register.presentatilon.RegisterState
+import com.example.fitness_app_compose.features.auth.register.presentatilon.RegisterUiState
 
 @Composable
 fun RegisterLoginNavigateButton(
