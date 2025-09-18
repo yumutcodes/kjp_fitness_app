@@ -1,0 +1,1 @@
+git commit --allow-empty -m "Buraya commit mesajınızı yazın"

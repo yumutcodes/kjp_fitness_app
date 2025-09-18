@@ -1,0 +1,1 @@
+mysql de user uiid byte 16 olacak

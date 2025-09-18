@@ -9,3 +9,5 @@ sonsuz login şeysi yap instagram vs gibi
 corotine için compasable içinde remebercorutine yerine bu işi viewmodel de yönet bence
 inital data yüklemek için viewModel de onstart kullan bence https://www.youtube.com/watch?v=mNKQ9dc1knI
 offline first kaydetme işini yap.
+android test unittest falan la test yazabilirsin ya da başka toollarla
+mysql de user uiid byte 16 olacak

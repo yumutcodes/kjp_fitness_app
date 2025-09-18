@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.update
 
 ) : ViewModel() {
 
+
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.
     private val _uiState = MutableStateFlow(RegisterUiState())
 
