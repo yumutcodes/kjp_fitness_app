@@ -11,4 +11,7 @@ data class LoginResponse(
     val message: String? = null
 )
 
-data class RegisterResponse(val message: String?)
+data class RegisterResponse(
+    val accessToken: String,
+    val refreshToken: String,
+    val message: String?)

@@ -33,7 +33,10 @@ data class LoginUiState(
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repo: AuthRepository,
-    private val sessionManager: SessionManager ): ViewModel() {
+    private val sessionManager: SessionManager
+):
+    ViewModel()
+{
 
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.
     private val _uiState = MutableStateFlow(LoginUiState())

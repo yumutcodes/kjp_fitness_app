@@ -29,7 +29,7 @@ private const val BASE_URL = "https://your.api.base.url/"
 object AppModule {
 
     @Provides
-    @Singleton
+    @Singleton//scope
     fun provideEncryptedSharedPrefs(@ApplicationContext context: Context): SharedPreferences {
         val masterKey = MasterKey.Builder(context)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
