@@ -1,11 +1,11 @@
 // src/main/java/com/example/fitness_app_compose/core/network/ApiService.kt
 package com.example.fitness_app_compose.core.network
 
-import com.example.fitness_app_compose.features.auth.data.model.LoginRequest
-import com.example.fitness_app_compose.features.auth.data.model.LoginResponse
-import com.example.fitness_app_compose.features.auth.data.model.RegisterRequest
-import com.example.fitness_app_compose.features.auth.data.model.RegisterResponse
-import com.example.fitness_app_compose.features.auth.data.model.RefreshTokenRequest
+import com.example.fitness_app_compose.core.auth.LoginRequest
+import com.example.fitness_app_compose.core.auth.LoginResponse
+import com.example.fitness_app_compose.core.auth.RegisterRequest
+import com.example.fitness_app_compose.core.auth.RegisterResponse
+import com.example.fitness_app_compose.core.auth.RefreshTokenRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

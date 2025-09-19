@@ -1,10 +1,10 @@
 package com.example.fitness_app_compose.features.auth.data.repository
 
 import com.example.fitness_app_compose.core.network.ApiService
-import com.example.fitness_app_compose.features.auth.data.model.LoginRequest
-import com.example.fitness_app_compose.features.auth.data.model.LoginResponse
-import com.example.fitness_app_compose.features.auth.data.model.RegisterRequest
-import com.example.fitness_app_compose.features.auth.data.model.RegisterResponse
+import com.example.fitness_app_compose.core.auth.LoginRequest
+import com.example.fitness_app_compose.core.auth.LoginResponse
+import com.example.fitness_app_compose.core.auth.RegisterRequest
+import com.example.fitness_app_compose.core.auth.RegisterResponse
 import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

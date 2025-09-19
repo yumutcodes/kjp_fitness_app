@@ -1,4 +1,4 @@
-package com.example.fitness_app_compose.features.auth.data.model
+package com.example.fitness_app_compose.core.auth
 
 
 data class LoginRequest(val email: String, val pass: String)

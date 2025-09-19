@@ -4,9 +4,7 @@ import com.example.fitness_app_compose.features.auth.domain.session.SessionManag
 import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fitness_app_compose.core.utilities.ui.error.AppError
-import com.example.fitness_app_compose.core.utilities.ui.uiText.UiText
-import com.example.fitness_app_compose.features.auth.data.model.LoginRequest
+import com.example.fitness_app_compose.core.auth.LoginRequest
 import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
