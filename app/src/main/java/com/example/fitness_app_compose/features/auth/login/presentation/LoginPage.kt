@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.fitness_app_compose.core.navigation.Screens
@@ -34,12 +35,13 @@ import com.example.fitness_app_compose.features.auth.login.presentation.viewmode
  */
 @Composable
 fun LoginPage(
-    loginwievmodel: LoginViewModel = viewModel(),
+    loginwievmodel: LoginViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
     // ViewModel'deki StateFlow'u, Compose'un anlayacağı bir State'e dönüştürüyoruz.
     // 'by' anahtar kelimesi sayesinde 'uiState.value' yerine doğrudan 'uiState' kullanabiliriz.
     val uiState by loginwievmodel.uiState.collectAsState()
+    //WithLifeCycle atmayı düşün.
 
     // UI'ın kendisini, state'i ve event'leri parametre olarak alan
     // başka bir Composable'a devrediyoruz. Bu, preview ve test için en iyi yöntemdir.
@@ -105,7 +107,12 @@ fun LoginScreenContent(
                 modifier = Modifier.align(Alignment.Start),
                 contentPadding = PaddingValues(end = 16.dp, start = 2.dp),
                 onClick = {
-                    navHostController.navigate(Screens.Register)
+
+                    navHostController.navigate(Screens.Register){
+                        popUpTo(Screens.Login) {
+                            inclusive = true
+                        }
+                    }
                 }
             ) {
                 Text(

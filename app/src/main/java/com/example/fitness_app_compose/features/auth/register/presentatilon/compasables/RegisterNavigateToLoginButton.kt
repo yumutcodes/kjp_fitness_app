@@ -33,7 +33,12 @@ when (uiState.registerState) {
             modifier = textButtonModifier,
             contentPadding = PaddingValues(end = 16.dp, start = 2.dp),
             onClick = {
-                navHostController.navigate(Screens.Login)
+
+                navHostController.navigate(Screens.Login){
+                    popUpTo(Screens.Register) {
+                        inclusive = true
+                    }
+                }
             }
         ) {
             Text(

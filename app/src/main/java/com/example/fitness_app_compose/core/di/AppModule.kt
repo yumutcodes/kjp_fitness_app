@@ -3,6 +3,7 @@ package com.example.fitness_app_compose.core.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.example.fitness_app_compose.core.network.ApiService
@@ -20,7 +21,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-
+import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
 private const val BASE_URL = "https://your.api.base.url/"
 
 @Module
@@ -45,7 +46,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthInterceptor(sessionManagerProvider: dagger.Lazy<com.example.fitness_app_compose.features.auth.domain.session.SessionManager>): AuthInterceptor {
+    fun provideAuthInterceptor(sessionManagerProvider: dagger.Lazy<SessionManager>): AuthInterceptor {
         // Lazy injection to avoid circular dependencies at creation time.
         return AuthInterceptor(sessionManagerProvider)
     }
@@ -72,6 +73,14 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSessionManager(sharedPreferences: SharedPreferences): SessionManager {
+        Log.d("SessionManager", "SessionManager oluşturuldu")
+        println("SessionManager oluşturuldu")
+        return SessionManager(sharedPreferences)
+    }
 }
 
 @Module

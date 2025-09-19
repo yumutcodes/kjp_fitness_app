@@ -8,6 +8,7 @@ import com.example.fitness_app_compose.core.utilities.ui.error.AppError
 import com.example.fitness_app_compose.core.utilities.ui.uiText.UiText
 import com.example.fitness_app_compose.features.auth.data.model.LoginRequest
 import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,6 +32,7 @@ data class LoginUiState(
 /**
  * MyScreen'in iş mantığını yöneten ViewModel.
  */
+@HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repo: AuthRepository,
     private val sessionManager: SessionManager ): ViewModel() {
