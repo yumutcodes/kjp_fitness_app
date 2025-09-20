@@ -1,10 +1,14 @@
 package com.example.fitness_app_compose.features.auth.register.presentatilon
 
 import androidx.lifecycle.ViewModel
+import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
+import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
 /**
  * Kullanıcı arayüzünün anlık durumunu temsil eden veri sınıfı.
@@ -15,8 +19,10 @@ import kotlinx.coroutines.flow.update
 /**
  * MyScreen'in iş mantığını yöneten ViewModel.
  */
-    class RegisterViewModel(
-
+@HiltViewModel
+    class RegisterViewModel @Inject constructor(
+    private val repo: AuthRepository,
+    private val sessionManager: SessionManager
 ) : ViewModel() {
 
 

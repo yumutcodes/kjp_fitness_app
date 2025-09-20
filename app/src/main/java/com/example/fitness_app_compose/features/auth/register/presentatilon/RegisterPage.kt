@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.fitness_app_compose.core.utilities.ui.preview.DevicePreviews
@@ -35,7 +36,7 @@ import com.example.fitness_app_compose.features.auth.register.presentatilon.comp
  */
 @Composable
 fun RegisterPage(
-    registerViewModel: RegisterViewModel = viewModel(), navHostController: NavHostController
+    registerViewModel: RegisterViewModel = hiltViewModel(), navHostController: NavHostController
 ) {
     // ViewModel'deki StateFlow'u, Compose'un anlayacağı bir State'e dönüştürüyoruz.
     // 'by' anahtar kelimesi sayesinde 'uiState.value' yerine doğrudan 'uiState' kullanabiliriz.

@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(private val api: ApiService) : AuthRepository {
+
     override suspend fun login(request: LoginRequest): Result<LoginResponse> = withContext(Dispatchers.IO) {
         runCatching {
             val resp = api.login(request)

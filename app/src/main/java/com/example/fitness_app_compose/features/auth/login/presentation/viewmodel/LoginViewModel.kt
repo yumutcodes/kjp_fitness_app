@@ -1,5 +1,6 @@
 package com.example.fitness_app_compose.features.auth.login.presentation.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
 import javax.inject.Inject
 import androidx.lifecycle.ViewModel
@@ -30,14 +31,18 @@ data class LoginUiState(
 /**
  * MyScreen'in iş mantığını yöneten ViewModel.
  */
+//SavedStateHandle dependencysi navigation ile gönderilen verileri okumaya yarar
+//hiltviewModel bu dependencyi otomatik olarak ekler.
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val repo: AuthRepository,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    savedStateHandle: SavedStateHandle
 ):
     ViewModel()
 {
-
+    private val age: Int = savedStateHandle.get<Int>("age") ?: 0
+    private val name: String = savedStateHandle.get<String>("name") ?: "Misafir"
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.
     private val _uiState = MutableStateFlow(LoginUiState())
 
@@ -110,7 +115,8 @@ class LoginViewModel @Inject constructor(
 
                 result.onSuccess { response ->
                     // Token'ları güvenli bir şekilde kaydet
-                    sessionManager.saveTokens(response.accessToken, response.refreshToken)
+                    sessionManager.saveTokens(response.accessToken,
+                        response.refreshToken)
 
                     // Başarı durumunu bildir
 //                    _uiState.update {

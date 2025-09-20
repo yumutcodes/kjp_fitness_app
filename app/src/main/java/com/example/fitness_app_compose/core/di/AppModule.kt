@@ -87,5 +87,6 @@ object AppModule {
 @InstallIn(SingletonComponent::class)
 abstract class BindingModule {
     @Binds
+    @Singleton // emin değilim Singleton mu olmalı ?
     abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 }

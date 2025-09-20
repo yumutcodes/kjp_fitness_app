@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
+//Singleton olarak SessionManager'ı oluşturuyoruz.
 class SessionManager @Inject constructor(private val prefs: SharedPreferences) {
     private val KEY_ACCESS = "KEY_ACCESS"
     private val KEY_REFRESH = "KEY_REFRESH"
