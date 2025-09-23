@@ -108,6 +108,9 @@ class LoginViewModel @Inject constructor(
         }
         // Network çağrısı
         viewModelScope.launch {
+//            val result = withContext(Dispatchers.IO) {
+//                repository.loadFromDatabase()   // IO havuzunda çalışır
+//            }
           //  _uiState.update { it.copy(isLoading = true, errorMessage = null, isSuccess = false) }
 
             try {
