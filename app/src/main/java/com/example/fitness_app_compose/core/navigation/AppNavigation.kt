@@ -20,7 +20,7 @@ fun AppNavigation() {
     // NavController'ı oluştur ve recomposition'lar boyunca durumunu hatırla.
     val navController = rememberNavController()
 
-    // NavHost, navigasyon grafiğini kurar.s
+    // NavHost, navigasyon grafiğini kurar
     NavHost(
 
         navController = navController,
@@ -38,6 +38,7 @@ fun AppNavigation() {
 
     ) {
         composable<Screens.Login> {
+            
             // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
             LoginPage(
                 navHostController = navController
