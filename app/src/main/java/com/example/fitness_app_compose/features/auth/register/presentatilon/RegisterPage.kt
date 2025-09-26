@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -38,6 +40,11 @@ import com.example.fitness_app_compose.features.auth.register.presentatilon.comp
 fun RegisterPage(
     registerViewModel: RegisterViewModel = hiltViewModel(), navHostController: NavHostController
 ) {
+    DisposableEffect(Unit) {
+        onDispose {
+            Log.d("Memory RegisterPage", "RegisterPage Deleted.")
+        }
+    }
     // ViewModel'deki StateFlow'u, Compose'un anlayacağı bir State'e dönüştürüyoruz.
     // 'by' anahtar kelimesi sayesinde 'uiState.value' yerine doğrudan 'uiState' kullanabiliriz.
     val uiState by registerViewModel.uiState.collectAsState()

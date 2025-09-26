@@ -1,5 +1,6 @@
 package com.example.fitness_app_compose.features.auth.login.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
 import javax.inject.Inject
@@ -41,6 +42,11 @@ class LoginViewModel @Inject constructor(
 ):
     ViewModel()
 {
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("ViewModelDeleted", "LoginViewModel Deleted")
+
+    }
     private val age: Int = savedStateHandle.get<Int>("age") ?: 0
     private val name: String = savedStateHandle.get<String>("name") ?: "Misafir"
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.

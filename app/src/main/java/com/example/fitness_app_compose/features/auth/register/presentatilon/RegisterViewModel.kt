@@ -1,5 +1,7 @@
 package com.example.fitness_app_compose.features.auth.register.presentatilon
 
+import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
 import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
@@ -22,9 +24,13 @@ import javax.inject.Inject
 @HiltViewModel
     class RegisterViewModel @Inject constructor(
     private val repo: AuthRepository,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("Memory ViewModelDeleted", "RegisterViewModel Deleted")
+    }
 
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.
     private val _uiState = MutableStateFlow(RegisterUiState())
