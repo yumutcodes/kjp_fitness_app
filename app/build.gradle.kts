@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
+
 }
 
 android {
@@ -42,12 +43,27 @@ android {
 }
 
 dependencies {
+    //Timber
+    implementation(libs.timber)
+    // moshi
+    // Moshi'nin ana kütüphanesi
+    implementation(libs.moshi)
+
+    // Moshi'nin Kotlin özellikleriyle (null safety vb.) uyumlu çalışmasını sağlar
+    implementation(libs.moshi.kotlin)
+
+    // Retrofit ile Moshi'yi bağlayan dönüştürücü
+    implementation(libs.converter.moshi)
+
+    // Kod üretimi için KSP (veya KAPT)
+    ksp(libs.moshi.kotlin.codegen)
 // -----------------------------------------------------------------
     // Bölüm 1: Ağ (Network)
     // API istekleri ve JSON işlemleri için
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+
 
     // Bölüm 2: Bağımlılık Enjeksiyonu (Dependency Injection)
     // Hilt ile bağımlılıkların yönetimi

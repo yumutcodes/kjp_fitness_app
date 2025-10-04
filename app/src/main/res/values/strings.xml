@@ -5,4 +5,11 @@
     <string name="error_unknown">An unknown error occurred. Please try again.</string>
     <string name="error_api">Something went wrong. Please try again later.</string>
     <string name="error_server">Service Error.</string>
+    <string name="error_no_internet">No internet connection found. Please check your connection and try again.</string>
+    <string name="error_timeout">The connection has timed out. Please try again later.</string>
+    <string name="error_connection">Failed to connect to the server. Please check your network and try again.</string>
+    <string name="error_token_expired">Your session has expired. Please log in again.</string>
+    <string name="error_invalid_credentials">Invalid username or password. Please try again.</string>
+    <string name="error_session_expired">Your session has expired. Please log in again.</string>
+    <string name="error_client">Client Error.</string>
 </resources>
