@@ -7,6 +7,7 @@ sealed interface RegisterState {
     object Success : RegisterState // İşlem başarılı
     data class Error(val message: String) : RegisterState // İşlemde hata var
 }
+// @Immutable ile de taglenebilir
 data class RegisterUiState(
     val nameText: String = "",
     val IsNameValid: Boolean = true,

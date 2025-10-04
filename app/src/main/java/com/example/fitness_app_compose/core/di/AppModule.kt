@@ -77,10 +77,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideSessionManager(sharedPreferences: SharedPreferences): SessionManager {
-        Log.d("SessionManager", "SessionManager oluşturuldu")
+        Log.d("Hilt SessionManager", "SessionManager oluşturuldu")
         println("SessionManager oluşturuldu")
         return SessionManager(sharedPreferences)
     }
+
+
 }
 
 @Module

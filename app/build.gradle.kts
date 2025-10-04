@@ -52,6 +52,7 @@ dependencies {
     // Bölüm 2: Bağımlılık Enjeksiyonu (Dependency Injection)
     // Hilt ile bağımlılıkların yönetimi
     implementation(libs.hilt.android)
+    implementation(libs.androidx.compose.material3)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose) // Hilt'in Compose Navigation ile entegrasyonu
 

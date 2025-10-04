@@ -42,7 +42,7 @@ fun RegisterPage(
 ) {
     DisposableEffect(Unit) {
         onDispose {
-            Log.d("Memory RegisterPage", "RegisterPage Deleted.")
+            Log.d("RegisterPage Deleted", "RegisterPage Deleted.")
         }
     }
     // ViewModel'deki StateFlow'u, Compose'un anlayacağı bir State'e dönüştürüyoruz.

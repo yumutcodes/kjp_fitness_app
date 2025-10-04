@@ -3,13 +3,16 @@ package com.example.fitness_app_compose.features.auth.register.presentatilon
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.fitness_app_compose.features.auth.domain.repository.AuthRepository
 import com.example.fitness_app_compose.features.auth.domain.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -29,7 +32,7 @@ import javax.inject.Inject
 ) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
-        Log.d("Memory ViewModelDeleted", "RegisterViewModel Deleted")
+        Log.d("ViewModel Deleted", "RegisterViewModel Deleted")
     }
 
     // Sadece ViewModel içerisinden değiştirilebilen, özel (private) MutableStateFlow.
@@ -74,15 +77,24 @@ import javax.inject.Inject
     /**
      * Metin alanını temizlemek için kullanılan fonksiyon.
      */
-   fun onRegisterClicked() {
-        _uiState.update { currentState ->
-    currentState.copy(
-        registerState= RegisterState.Loading
-    )
+    fun onRegisterClicked() {
+        viewModelScope.launch {
+            // Set the state to Loading
+            _uiState.update { currentState ->
+                currentState.copy(registerState = RegisterState.Loading)
+            }
 
-}
+            // Wait for 3 seconds
+            delay(3000)
 
+            // Set the state back to Normal
+            _uiState.update { currentState ->
+                currentState.copy(registerState = RegisterState.Idle)
+            }
+        }
     }
+
+
 
 
     /**

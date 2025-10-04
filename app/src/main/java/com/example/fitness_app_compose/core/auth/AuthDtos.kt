@@ -1,8 +1,8 @@
 package com.example.fitness_app_compose.core.auth
 
 
-data class LoginRequest(val email: String, val pass: String)
-data class RegisterRequest(val name: String, val email: String, val pass: String)
+data class LoginRequest(val email: String, val password: String)
+data class RegisterRequest(val name: String, val email: String, val password: String)
 data class RefreshTokenRequest(val refreshToken: String)
 
 data class LoginResponse(
@@ -14,4 +14,4 @@ data class LoginResponse(
 data class RegisterResponse(
     val accessToken: String,
     val refreshToken: String,
-    val message: String?)
+    val message: String?= null)

@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
 {
     override fun onCleared() {
         super.onCleared()
-        Log.d("ViewModelDeleted", "LoginViewModel Deleted")
+        Log.d("LoginViewModel Deleted", "LoginViewModel Deleted")
 
     }
     private val age: Int = savedStateHandle.get<Int>("age") ?: 0
@@ -120,7 +120,7 @@ class LoginViewModel @Inject constructor(
           //  _uiState.update { it.copy(isLoading = true, errorMessage = null, isSuccess = false) }
 
             try {
-                val result = repo.login(LoginRequest(email = email, pass = password))
+                val result = repo.login(LoginRequest(email = email, password = password))
 
                 result.onSuccess { response ->
                     // Token'ları güvenli bir şekilde kaydet

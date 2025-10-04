@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">fitness_app_compose</string>
+    <string name="error_unauthorized">Unauthorized access. Please login again.</string>
+    <string name="error_network">Please check your internet connection.</string>
+    <string name="error_unknown">An unknown error occurred. Please try again.</string>
+    <string name="error_api">Something went wrong. Please try again later.</string>
+    <string name="error_server">Service Error.</string>
 </resources>

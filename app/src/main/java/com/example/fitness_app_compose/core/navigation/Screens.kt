@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 // com/example/myapp/core/navigation/Screen.kt
 //TODO: en iyi yöntem aşşağıda
 // https://aistudio.google.com/prompts/189t4_8GGotss_zRXLBSH-KJaT8QUw5ih
+
 @Serializable
 sealed interface Screens {
     // Argümanı olmayan basit bir ekran için 'object' kullanmak yeterlidir.

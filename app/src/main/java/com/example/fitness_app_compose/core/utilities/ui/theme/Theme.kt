@@ -70,6 +70,8 @@ fun Fitness_app_composeTheme(
 ) {
     val appColors = if (darkTheme) DarkAppColorPalette else LightAppColorPalette
     val colorScheme = when {
+        //bura kaldırılabilir opsiyonel olarak
+        //dynamicColor ekler
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
@@ -78,6 +80,7 @@ fun Fitness_app_composeTheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+    //AppTheme de LocalAppColors.current ile appColorsa erişiriz.
     CompositionLocalProvider(LocalAppColors provides appColors) {
         MaterialTheme(
             colorScheme = colorScheme,
@@ -87,7 +90,7 @@ fun Fitness_app_composeTheme(
     }
 }
 // --- 4. KOLAY ERİŞİM İÇİN BİR OBJECT OLUŞTUR (ŞİDDETLE TAVSİYE EDİLİR) ---
-// Bu sayede her seferinde LocalAppColors.current yazmak zorunda kalmazsın.
+// Bu sayede her seferinde LocalA   ppColors.current yazmak zorunda kalmazsın.
 object AppTheme {
     val appColors: AppColors
         @Composable

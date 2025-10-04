@@ -3,8 +3,12 @@ package com.example.fitness_app_compose.core.navigation
 import RegisterPage
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -21,36 +25,41 @@ fun AppNavigation() {
     val navController = rememberNavController()
 
     // NavHost, navigasyon grafiğini kurar
-    NavHost(
-
-        navController = navController,
-        startDestination = Screens.Register, // Uygulama açıldığında gösterilecek ilk ekran
-        enterTransition = { EnterTransition.None },
-
-        // Bir ekrandan çıkarken animasyon olmasın
-        exitTransition = { ExitTransition.None },
-
-        // Geri tuşuyla bir ekrana dönerken animasyon olmasın
-        popEnterTransition = { EnterTransition.None },
-
-        // Geri tuşuyla bir ekrandan çıkarken animasyon olmasın
-        popExitTransition = { ExitTransition.None }
-
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
     ) {
-        composable<Screens.Login> {
-            
-            // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
-            LoginPage(
-                navHostController = navController
-            )
-        }
-        composable<Screens.Register> {
-            // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
-            RegisterPage(
-navHostController = navController
-            )
-        }
+        NavHost(
 
+            navController = navController,
+            startDestination = Screens.Register, // Uygulama açıldığında gösterilecek ilk ekran
+            enterTransition = { EnterTransition.None },
+
+            // Bir ekrandan çıkarken animasyon olmasın
+            exitTransition = { ExitTransition.None },
+
+            // Geri tuşuyla bir ekrana dönerken animasyon olmasın
+            popEnterTransition = { EnterTransition.None },
+
+            // Geri tuşuyla bir ekrandan çıkarken animasyon olmasın
+            popExitTransition = { ExitTransition.None }
+
+        ) {
+            composable<Screens.Login> {
+
+                // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
+                LoginPage(
+                    navHostController = navController
+                )
+            }
+            composable<Screens.Register> {
+                // it -> NavBackStackEntry: Bu rotaya ait bilgileri içerir.
+                RegisterPage(
+                    navHostController = navController
+                )
+            }
+
+        }
     }
 }
 //örnek kod
