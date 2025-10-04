@@ -44,7 +44,7 @@ class LoginViewModel @Inject constructor(
 {
     override fun onCleared() {
         super.onCleared()
-        Log.d("LoginViewModel Deleted", "LoginViewModel Deleted")
+        Log.d("ViewModelDeleted", "LoginViewModel Deleted")
 
     }
     private val age: Int = savedStateHandle.get<Int>("age") ?: 0
